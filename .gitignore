@@ -1,33 +1,41 @@
-HELP.md
+# Pliki binarne i kompilacyjne
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Pliki IntelliJ IDEA
+.idea/
 *.iml
 *.ipr
+*.iws
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Pliki Eclipse
+.project
+.classpath
+.settings/
+.factorypath
 
-### VS Code ###
-.vscode/
+# Pliki Maven i Gradle
+.mvn/
+!**/src/main/resources/application*.properties
+**/application-*.properties
+**/application-*.yml
+**/application.yml
+**/application.properties
+
+# Pliki środowiskowe
+.env
+
+# Pliki logów i generowane pliki
+logs/
+*.log
+hs_err_pid*
+
+# Pliki systemowe
+.DS_Store
+Thumbs.db
+
+# Pliki Docker
+docker-compose.override.yml
