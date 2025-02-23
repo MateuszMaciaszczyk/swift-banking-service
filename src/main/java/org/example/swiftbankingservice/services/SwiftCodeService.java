@@ -52,8 +52,22 @@ public class SwiftCodeService {
         return new SwiftCodesByCountryDTO(countryISO2, countryName, swiftCodesDTO);
     }
 
-    public SwiftCode addSwiftCode(SwiftCode swiftCode) {
-        return repository.save(swiftCode);
+    public String addSwiftCode(SwiftCodeDTO swiftCodeDTO) {
+        if (repository.findBySwiftCode(swiftCodeDTO.getSwiftCode()).isPresent()) {
+            return "Error: SWIFT code already exists!";
+        }
+
+        SwiftCode swiftCode = new SwiftCode(
+                swiftCodeDTO.getSwiftCode(),
+                swiftCodeDTO.getBankName(),
+                swiftCodeDTO.getAddress(),
+                swiftCodeDTO.getCountryISO2(),
+                swiftCodeDTO.getCountryName(),
+                swiftCodeDTO.isHeadquarter()
+        );
+
+        repository.save(swiftCode);
+        return "SWIFT code added successfully!";
     }
 
     public void deleteSwiftCode(String swiftCode) {
