@@ -2,11 +2,11 @@ package org.example.swiftbankingservice.controllers;
 
 import org.example.swiftbankingservice.models.SwiftCode;
 import org.example.swiftbankingservice.models.SwiftCodeDTO;
+import org.example.swiftbankingservice.models.SwiftCodesByCountryDTO;
 import org.example.swiftbankingservice.services.SwiftCodeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,7 +27,7 @@ public class SwiftCodeController {
     }
 
     @GetMapping("/country/{countryISO2}")
-    public List<SwiftCodeDTO> getSwiftCodesByCountry(@PathVariable String countryISO2) {
+    public SwiftCodesByCountryDTO getSwiftCodesByCountry(@PathVariable String countryISO2) {
         return service.getSwiftCodesByCountry(countryISO2);
     }
 

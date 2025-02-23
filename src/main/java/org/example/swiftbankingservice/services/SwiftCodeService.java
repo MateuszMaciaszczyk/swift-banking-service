@@ -2,6 +2,7 @@ package org.example.swiftbankingservice.services;
 
 import org.example.swiftbankingservice.models.SwiftCode;
 import org.example.swiftbankingservice.models.SwiftCodeDTO;
+import org.example.swiftbankingservice.models.SwiftCodesByCountryDTO;
 import org.example.swiftbankingservice.repositories.SwiftCodeRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,11 +40,16 @@ public class SwiftCodeService {
         return Optional.of(convertToDTO(swiftCodeEntity, branches));
     }
 
-    public List<SwiftCodeDTO> getSwiftCodesByCountry(String countryISO2) {
-        return repository.findByCountryISO2(countryISO2)
-                .stream()
+    public SwiftCodesByCountryDTO getSwiftCodesByCountry(String countryISO2) {
+        List<SwiftCode> swiftCodes = repository.findByCountryISO2(countryISO2);
+
+        String countryName = swiftCodes.getFirst().getCountryName();
+
+        List<SwiftCodeDTO> swiftCodesDTO = swiftCodes.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+
+        return new SwiftCodesByCountryDTO(countryISO2, countryName, swiftCodesDTO);
     }
 
     public SwiftCode addSwiftCode(SwiftCode swiftCode) {
