@@ -1,6 +1,5 @@
 package org.example.swiftbankingservice.controllers;
 
-import org.example.swiftbankingservice.models.SwiftCode;
 import org.example.swiftbankingservice.models.SwiftCodeDTO;
 import org.example.swiftbankingservice.models.SwiftCodesByCountryDTO;
 import org.example.swiftbankingservice.services.SwiftCodeService;
@@ -32,8 +31,18 @@ public class SwiftCodeController {
     }
 
     @PostMapping
-    public ResponseEntity<SwiftCode> addSwiftCode(@RequestBody SwiftCode swiftCode) {
-        return ResponseEntity.ok(service.addSwiftCode(swiftCode));
+    public ResponseEntity<?> addSwiftCode(@RequestBody SwiftCodeDTO swiftCodeDTO) {
+        if (swiftCodeDTO.getSwiftCode() == null || swiftCodeDTO.getSwiftCode().isEmpty()) {
+            return ResponseEntity.badRequest().body("{\"message\": \"SWIFT code cannot be empty\"}");
+        }
+
+        String message = service.addSwiftCode(swiftCodeDTO);
+
+        if (message.startsWith("Error")) {
+            return ResponseEntity.badRequest().body("{\"message\": \"" + message + "\"}");
+        }
+
+        return ResponseEntity.ok("{\"message\": \"" + message + "\"}");
     }
 
     @DeleteMapping("/{swiftCode}")

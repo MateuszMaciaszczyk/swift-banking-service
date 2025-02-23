@@ -5,38 +5,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "swift_codes")
 public class SwiftCode {
     @Id
     @Column(unique = true, nullable = false)
     private String swiftCode;
-
-    @Column(nullable = false)
     private String bankName;
-
     private String address;
-
-    @Column(nullable = false)
     private String codeType;
-
-    @Column(nullable = false)
     private String townName;
-
-    @Column(nullable = false)
     private String timeZone;
-
-    @Column(nullable = false)
     private String countryISO2;
-
-    @Column(nullable = false)
     private String countryName;
-
-    @Column(nullable = false)
     private boolean isHeadquarter;
 
+    public SwiftCode(String swiftCode, String bankName, String address, String countryISO2, String countryName, boolean isHeadquarter) {
+        this.swiftCode = swiftCode;
+        this.bankName = bankName;
+        this.address = address;
+        this.countryISO2 = countryISO2;
+        this.countryName = countryName;
+        this.isHeadquarter = isHeadquarter;
+    }
 }
