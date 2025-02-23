@@ -26,8 +26,14 @@ public class SwiftCodeController {
     }
 
     @GetMapping("/country/{countryISO2}")
-    public SwiftCodesByCountryDTO getSwiftCodesByCountry(@PathVariable String countryISO2) {
-        return service.getSwiftCodesByCountry(countryISO2);
+    public ResponseEntity<?>  getSwiftCodesByCountry(@PathVariable String countryISO2) {
+        SwiftCodesByCountryDTO response = service.getSwiftCodesByCountry(countryISO2);
+
+        if (response == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -46,8 +52,13 @@ public class SwiftCodeController {
     }
 
     @DeleteMapping("/{swiftCode}")
-    public ResponseEntity<String> deleteSwiftCode(@PathVariable String swiftCode) {
-        service.deleteSwiftCode(swiftCode);
-        return ResponseEntity.ok("SWIFT code deleted");
+    public ResponseEntity<?> deleteSwiftCode(@PathVariable String swiftCode) {
+        String message = service.deleteSwiftCode(swiftCode);
+
+        if (message.startsWith("Error")) {
+            return ResponseEntity.badRequest().body("{\"message\": \"" + message + "\"}");
+        }
+
+        return ResponseEntity.ok("{\"message\": \"" + message + "\"}");
     }
 }

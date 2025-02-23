@@ -70,8 +70,13 @@ public class SwiftCodeService {
         return "SWIFT code added successfully!";
     }
 
-    public void deleteSwiftCode(String swiftCode) {
+    public String deleteSwiftCode(String swiftCode) {
+        if (!repository.existsById(swiftCode)) {
+            return "Error: SWIFT code not found!";
+        }
+
         repository.deleteById(swiftCode);
+        return "SWIFT code deleted successfully!";
     }
 
     private SwiftCodeDTO convertToDTO(SwiftCode swiftCode) {
