@@ -1,6 +1,8 @@
-FROM eclipse-temurin:23-jdk
+FROM amazoncorretto:17
 
 WORKDIR /app
+
+RUN yum install -y tar gzip
 
 COPY . .
 

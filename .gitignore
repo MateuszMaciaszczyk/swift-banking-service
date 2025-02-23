@@ -18,7 +18,6 @@ target/
 .factorypath
 
 # Pliki Maven i Gradle
-.mvn/
 !**/src/main/resources/application*.properties
 **/application-*.properties
 **/application-*.yml

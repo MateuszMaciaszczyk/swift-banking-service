@@ -4,6 +4,7 @@ import org.example.swiftbankingservice.models.SwiftCode;
 import org.example.swiftbankingservice.models.SwiftCodeDTO;
 import org.example.swiftbankingservice.models.SwiftCodesByCountryDTO;
 import org.example.swiftbankingservice.repositories.SwiftCodeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class SwiftCodeService {
     private final SwiftCodeRepository repository;
 
+    @Autowired
     public SwiftCodeService(SwiftCodeRepository repository) {
         this.repository = repository;
     }
@@ -43,7 +45,8 @@ public class SwiftCodeService {
     public SwiftCodesByCountryDTO getSwiftCodesByCountry(String countryISO2) {
         List<SwiftCode> swiftCodes = repository.findByCountryISO2(countryISO2);
 
-        String countryName = swiftCodes.getFirst().getCountryName();
+//        String countryName = swiftCodes.getFirst().getCountryName();
+        String countryName = swiftCodes.stream().findFirst().get().getCountryName();
 
         List<SwiftCodeDTO> swiftCodesDTO = swiftCodes.stream()
                 .map(this::convertToDTO)
