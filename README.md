@@ -2,11 +2,12 @@
 
 SWIFT Banking Service API to aplikacja RESTful stworzona w **Spring Boot**, która zarządza kodami SWIFT banków.  
 Aplikacja pozwala na:  
+
 ✅ Dodawanie kodów SWIFT  
 ✅ Pobieranie informacji o kodach SWIFT  
 ✅ Pobieranie wszystkich kodów SWIFT w danym kraju  
 ✅ Usuwanie kodów SWIFT
----
+
 ## 🚀 **Jak uruchomić aplikację?**
 
 ### 🔹 **Z Dockerem**
@@ -17,7 +18,6 @@ docker-compose up --build
 ```
 📌 Aplikacja będzie dostępna pod adresem: `http://localhost:8080`
 
----
 ## 📖 **Dostępne endpointy**
 
 | Metoda  | Endpoint                                   | Opis |
@@ -26,8 +26,6 @@ docker-compose up --build
 | **GET**    | `/v1/swift-codes/{swiftCode}`           | Pobiera informacje o danym kodzie SWIFT |
 | **GET**    | `/v1/swift-codes/country/{countryISO2}` | Pobiera wszystkie kody SWIFT w danym kraju |
 | **DELETE** | `/v1/swift-codes/{swiftCode}`           | Usuwa kod SWIFT |
-
----
 
 ## 📌 Przykłady użycia
 
@@ -51,13 +49,12 @@ curl -X GET http://localhost:8080/v1/swift-codes/BOFAUS3NXXX
 🔹 3. Pobranie wszystkich kodów SWIFT w kraju
 ```sh
 curl -X GET http://localhost:8080/v1/swift-codes/country/US
-
 ```
 🔹 4. Usunięcie kodu SWIFT
 ```sh
 curl -X DELETE http://localhost:8080/v1/swift-codes/BOFAUS3NXXX
 ```
----
+
 ## 🔍 Testowanie
 Możesz uruchomić testy, aby sprawdzić, czy API działa poprawnie.
 ```sh
